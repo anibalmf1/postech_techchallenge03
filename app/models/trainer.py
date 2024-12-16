@@ -1,6 +1,4 @@
 import os
-import re
-
 import pandas as pd
 from peft import LoraConfig, TaskType, get_peft_model
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer
@@ -10,7 +8,7 @@ import wandb
 from app.utils.constants import (
     TRAINED_MODELS_DIR, MODEL_NAME,
     DATASET_PATH, FINE_TUNING_OUTPUT_DIR,
-    BATCH_SIZE, NUM_TRAIN_EPOCHS, LOG_DIR, TEST_SIZE
+    BATCH_SIZE, NUM_TRAIN_EPOCHS, LOG_DIR,
 )
 
 def clean_file(filename):
@@ -127,8 +125,8 @@ def train_fine_tune(filename: str, sample: int, epochs: int):
     config = LoraConfig(
         task_type=TaskType.CAUSAL_LM,
         inference_mode=False,
-        r=8,
-        lora_alpha=16,
+        r=32,
+        lora_alpha=32,
         lora_dropout=0.1
     )
     model = get_peft_model(model, config)
@@ -140,7 +138,6 @@ def train_fine_tune(filename: str, sample: int, epochs: int):
     wandb.init(project="postech03", name="distilgpt2-fine-tuning")
     print("Projeto inicializado no WandB.")
 
-    epochs = NUM_TRAIN_EPOCHS if epochs == 0 else epochs
     print("Configurando os argumentos de treinamento...")
     training_args = TrainingArguments(
         output_dir=FINE_TUNING_OUTPUT_DIR,
@@ -148,9 +145,8 @@ def train_fine_tune(filename: str, sample: int, epochs: int):
         eval_strategy="no",
         learning_rate=3e-5,
         per_device_train_batch_size=BATCH_SIZE,
-        num_train_epochs=epochs,
         warmup_steps=50,
-        save_steps=100,
+        save_steps=50,
         save_total_limit=3,
         logging_dir=LOG_DIR,
         logging_steps=50,
@@ -158,7 +154,7 @@ def train_fine_tune(filename: str, sample: int, epochs: int):
         report_to="wandb",
         fp16=True,
         gradient_accumulation_steps=4,
-        dataloader_num_workers=4,
+        dataloader_num_workers=2,
         optim="adamw_torch",
     )
     print("Argumentos de treinamento configurados!")
