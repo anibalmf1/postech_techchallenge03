@@ -4,6 +4,9 @@ Este projeto é uma aplicação desenvolvida utilizando **FastAPI** que tem como
 para geração de textos baseados em títulos de produtos. Ele fornece uma interface de API para interagir com o modelo e
 gerar conteúdos automaticamente.
 
+### Video explicativo do projeto
+Link: [youtube](https://youtu.be/lAauanxnBHk)
+
 ## Estrutura do Projeto
 
 O código principal do projeto está localizado no arquivo `main.py`, e a aplicação é configurada usando o framework *

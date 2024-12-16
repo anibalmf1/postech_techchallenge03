@@ -37,12 +37,11 @@ async def verify(start: int, end: int, payload: FilenamePayload):
 class TrainModelPayload(BaseModel):
     filename: str
     sample: int = 0
-    epochs: int = 0
 
 @router.post("/model")
 async def train_model(payload: TrainModelPayload):
     try:
-        train_fine_tune(payload.filename, payload.sample, payload.epochs)
+        train_fine_tune(payload.filename, payload.sample)
 
         return {"message": "Treinamento concluído!"}
     except Exception as e:

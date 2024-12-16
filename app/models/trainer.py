@@ -71,7 +71,7 @@ def generate_dataset(filename):
             )["input_ids"],
         }
 
-    
+
 
     print("Carregando o dataset...")
     if filename.endswith("json"):
@@ -156,6 +156,7 @@ def train_fine_tune(filename: str, sample: int):
         gradient_accumulation_steps=4,
         dataloader_num_workers=2,
         optim="adamw_torch",
+        num_train_epochs=1,
     )
     print("Argumentos de treinamento configurados!")
 
