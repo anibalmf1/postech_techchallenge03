@@ -25,8 +25,8 @@ Siga os passos abaixo para instalar as dependências do projeto.
 1. Clone este repositório:
 
    ```bash
-   git clone <URL_REPOSITORIO>
-   cd <PASTA_REPOSITORIO>
+   git clone https://github.com/anibalmf1/postech_techchallenge03.git
+   cd postech_techchallenge03
    ```
 
 2. Instale as dependências listadas no arquivo `requirements.txt`:
