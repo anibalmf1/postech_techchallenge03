@@ -106,7 +106,7 @@ def verify_dataset(filename: str, start: int, end: int):
     return dataset[start:end]
 
 
-def train_fine_tune(filename: str, sample: int, epochs: int):
+def train_fine_tune(filename: str, sample: int):
     print("Carregando o tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     tokenizer.pad_token = tokenizer.eos_token

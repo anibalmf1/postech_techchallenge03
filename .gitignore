@@ -1,0 +1,7 @@
+trained_models
+training_files
+logs
+fine_tuning_output
+.idea
+wandb
+.env_vars
